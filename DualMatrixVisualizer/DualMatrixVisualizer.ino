@@ -5,7 +5,7 @@
 #include <Sparkfun_Spectrum_Shield.h>
 
 #define MATRIX_ONE_PIN 6
-#define MATRIX_TWO_PIN 7
+#define MATRIX_TWO_PIN 11
 #define LED_ROW 8
 #define LED_COLUMN 8
 
@@ -25,7 +25,7 @@ Adafruit_NeoMatrix leftMatrix = Adafruit_NeoMatrix(LED_ROW, LED_COLUMN, MATRIX_T
   NEO_GRB            + NEO_KHZ800);
 
 byte color[] = {25, 25, 112};
-byte topColor[] = {0,0,255};
+byte topColor[] = {255,0,0};
 
 Timer t;
 
@@ -83,17 +83,17 @@ void updateColumnSeparateChannels(int rightOn, int leftOn, int column)
     
     if(i < (leftOn-1))
     {
-      leftMatrix.drawPixel(i, column, leftMatrix.Color(color[0], color[1], color[2]));
+      leftMatrix.drawPixel(i, column+1, leftMatrix.Color(color[0], color[1], color[2]));
     }
     else
     {      
       if(leftTopArray[column] == i)
       {
-        leftMatrix.drawPixel(i, column, leftMatrix.Color(topColor[0], topColor[1], topColor[2]));        
+        leftMatrix.drawPixel(i, column+1, leftMatrix.Color(topColor[0], topColor[1], topColor[2]));        
       }
       else
       {        
-        leftMatrix.drawPixel(i, column, leftMatrix.Color(0, 0, 0));
+        leftMatrix.drawPixel(i, column+1, leftMatrix.Color(0, 0, 0));
       }
     }
   }
@@ -128,7 +128,7 @@ void loop() {
   rightMatrix.show();
   leftMatrix.show();
   t.update();
-  delay(50);
+  delay(25);
 
 }
 
